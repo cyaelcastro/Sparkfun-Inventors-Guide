@@ -47,7 +47,7 @@ try:
 	    elif InB3 == False:
 	        print ("B3")
 			BZZR.start(2)
-	                BZZR.ChangeFrequency(f)
+			BZZR.ChangeFrequency(f)
 			time.sleep(0.2)
 		BZZR.stop()
 except KeyboardInterrupt:
