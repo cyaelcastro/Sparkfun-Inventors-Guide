@@ -27,7 +27,16 @@ GPIO.setup(BUZZER, GPIO.OUT)
 BZZR = GPIO.PWM(BUZZER, 440)
 
 def buttonCheck():
-	pass
+	if not GPIO.input(Button[0]):
+		return 0
+	elif not GPIO.input(Button[1]):
+		return 1
+	elif not GPIO.input(Button[2]):
+		return 2
+	elif not GPIO.input(Button[3]):
+		return 3
+	else:
+		return 4
 
 def startSecuence():
 
@@ -75,6 +84,9 @@ def flashLED(ledNumber):
 	BZZR.start(2)
 	BZZR.ChangeFrequency(tones[ledNumber])
 
+def allLEDoff():
+	GPIO.output(Led,GPIO.LOW)
+	BZZR.stop()
 	
 if __name__ == '__main__':
 	try:
@@ -89,9 +101,29 @@ if __name__ == '__main__':
 				startTime = time.time()
 
 				while True:
+					pressedButton = buttonCheck()
+					if pressedButton <4:
+						flashLED(pressedButton)
+
+						if pressedButton == buttonSequence[i]:
+							time.sleep(.250)
+							allLEDoff()
+							break
+						else
+							loseSequence()
+							break
+					else:
+						allLEDoff()
+					if time.time() - startTime > timeLimit:
+						loseSequence
+						break
 
 
+				roundCounter += 1
 
+				if roundCounter >= roundsToWin:
+					winSequence()
+				time.sleep(.5)
 	except KeyboardInterrupt:
 	pass
 
