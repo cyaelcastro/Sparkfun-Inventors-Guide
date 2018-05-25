@@ -40,16 +40,16 @@ try:
 			BZZR.ChangeFrequency(a)
 			time.sleep(0.2)
 		elif InB2 == False:
-            print ("B2")
+		        print ("B2")
 			BZZR.start(2)
-	        BZZR.ChangeFrequency(d)
+	        	BZZR.ChangeFrequency(d)
 			time.sleep(0.2)
-	    elif InB3 == False:
-	        print ("B3")
+		elif InB3 == False:
+		        print ("B3")
 			BZZR.start(2)
 			BZZR.ChangeFrequency(f)
 			time.sleep(0.2)
-		BZZR.stop()
+			BZZR.stop()
 except KeyboardInterrupt:
 	pass
 print("The End")
