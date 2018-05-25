@@ -1,6 +1,6 @@
 import time, random
+import RPi.GPIO as GPIO
 
-import Rpi.GPIO as GPIO
 GPIO.setmode(GPIO.BOARD)
 
 BUZZER = 16
@@ -15,14 +15,8 @@ roundsToWin = 10
 timeLimit = 2.0
 gameStarted = False
 
-GPIO.setup(B1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(B2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(B3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(B4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(L1, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(L2, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(L3, GPIO.OUT, initial=GPIO.LOW)
-GPIO.setup(L4, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(Button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(Led, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(BUZZER, GPIO.OUT)
 BZZR = GPIO.PWM(BUZZER, 440)
 
@@ -43,10 +37,10 @@ def startSecuence():
 	for i in range(0,10):
 		buttonSequence.insert(i, random.randint(0,3))
 	for i in range(0,4):
-		p.start(2)
+		BZZR.start(2)
 		BZZR.ChangeFrequency(tones[i])
 		time.sleep (.2)
-		BZZR.stop
+		BZZR.stop()
 		GPIO.output(Led,GPIO.HIGH)
 		time.sleep(.1)
 		GPIO.output(Led,GPIO.LOW)
@@ -109,7 +103,7 @@ if __name__ == '__main__':
 							time.sleep(.250)
 							allLEDoff()
 							break
-						else
+						else:
 							loseSequence()
 							break
 					else:
@@ -125,7 +119,6 @@ if __name__ == '__main__':
 					winSequence()
 				time.sleep(.5)
 	except KeyboardInterrupt:
-	pass
-
+		pass
 	GPIO.cleanup()
 	print("The End")
