@@ -8,14 +8,14 @@ Button = [11,12,13,15]
 Led = [29,31,33,35]
 tones = [262, 330, 392, 494]
 
-buttonSequence= [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
-roundsToWin = 10
-timeLimit = 4.0
+global buttonSequence
+buttonSequence = [3,3,3,3,3]
+roundsToWin = 5
+timeLimit = 2.0
 global gameStarted
 gameStarted = False
 pressedButton = 4
-#global roundCounter
-#roundCounter = 1 
+
 GPIO.setup(Button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(Led, GPIO.OUT, initial=GPIO.LOW)
 GPIO.setup(BUZZER, GPIO.OUT)
@@ -33,26 +33,21 @@ def allLEDoff():
 
 def buttonCheck():
 	if GPIO.input(Button[0]) == False:
-		
 		return 0
 	elif GPIO.input(Button[1]) == False:
-		
 		return 1
 	elif GPIO.input(Button[2]) == False:
-		
 		return 2
 	elif GPIO.input(Button[3]) == False:
-		
 		return 3
 	else:
-		#print ("B4 Default")
 		return 4
 
-def startSecuence():
+def startSecuence(roundsToWin):
+	global buttonSequence
 	for i in range(0,roundsToWin):
-		#buttonSequence[i] = random.randint(0,3)
-		pass
-	
+		buttonSequence[i] = random.randint(0,3)
+					
 	for i in range(0,4):
 		BZZR.start(2)
 		BZZR.ChangeFrequency(tones[i])
@@ -62,7 +57,6 @@ def startSecuence():
 		time.sleep(0.1)
 		GPIO.output(Led,GPIO.LOW)
 		time.sleep(0.1)
-	print (buttonSequence)
 def winSequence():
 	GPIO.output(Led,GPIO.HIGH)
 	
@@ -100,11 +94,10 @@ def winSequence():
 	pressedButton = buttonCheck()
 	while  pressedButton > 3:
 		pressedButton = buttonCheck()
-		time.sleep(0.01)
-	time.sleep(.1)
+		time.sleep(0.1)
+	time.sleep(1)
 	global gameStarted
 	gameStarted = False
-	#GPIO.output(Led,GPIO.LOW)
 	
 
 def loseSequence():
@@ -135,8 +128,8 @@ def loseSequence():
 	pressedButton = buttonCheck()
 	while pressedButton > 3:
 		pressedButton = buttonCheck()
-		time.sleep(0.01)
-	time.sleep(0.2)
+		time.sleep(0.1)
+	time.sleep(1)
 	global gameStarted
 	gameStarted = False
 	
@@ -144,20 +137,18 @@ if __name__ == '__main__':
 	try:
 		while True:
 			if gameStarted == False :
-	
-				startSecuence()
+				startSecuence(roundsToWin)
 				global roundCounter 
 				roundCounter = 1
-	
 				time.sleep(1.5)
-	
 				gameStarted = True
-			for i in range(0,roundCounter): #F1
 	
+			for i in range(0,roundCounter): #F1
+				
 				flashLED(buttonSequence[i])
 				time.sleep(0.2)
 				allLEDoff()
-				time.sleep(0.2)
+				time.sleep(0.3)
 
 			for i in range(0, roundCounter): #F2
 				
@@ -183,13 +174,16 @@ if __name__ == '__main__':
 					if time.time() - startTime > timeLimit:
 						loseSequence()
 						break
-					time.sleep(0.05)
 
-			roundCounter = roundCounter + 1
+					time.sleep(0.3)
 
 			if roundCounter >= roundsToWin:
 				winSequence()
-			time.sleep(.5)
+			time.sleep(1)
+			
+			roundCounter = roundCounter + 1
+
+
 	except KeyboardInterrupt:
 		pass
 	GPIO.cleanup()
