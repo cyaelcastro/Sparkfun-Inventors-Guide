@@ -39,7 +39,7 @@ try:
 		print "Distancia: "+str(distance)+" cm"
 		time.sleep(2)
 		GPIO.output(LED,GPIO.LOW)
-except Exception as e:
-	raise e
+except KeyboardInterrupt:
+	pass
 print("The End")
 GPIO.cleanup()
