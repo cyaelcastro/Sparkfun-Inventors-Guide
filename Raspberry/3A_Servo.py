@@ -2,16 +2,17 @@ import RPi.GPIO as GPIO
 from time import sleep
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(03, GPIO.OUT)
-pwm = GPIO.PWM(03,50) #PIN 3 at 50Hz
+servo = 11
+GPIO.setup(servo, GPIO.OUT)
+pwm = GPIO.PWM(servo,50) #PIN at 50Hz
 pwm.start(0) #0 duty cycle
 
 def SetAngle(angle):
 	duty = angle / 18 +2
-	GPIO.output(03, True)
+	GPIO.output(servo, GPIO.HIGH)
 	pwm.ChangeDutyCycle(duty)
 	sleep(1)
-	GPIO.output(03, False)
+	GPIO.output(servo, GPIO.LOW)
 	pwm.ChangeDutyCycle(0)
 
 if __name__ == "__main__":
