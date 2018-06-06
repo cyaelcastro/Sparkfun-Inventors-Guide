@@ -37,19 +37,19 @@ try:
 		if InB1 == False:
 			print ("B1")
 			BZZR.start(2)
-			BZZR.ChangeFrequency(a)
+			BZZR.ChangeFrequency(440)
 			time.sleep(0.2)
 		elif InB2 == False:
 		        print ("B2")
-			BZZR.start(2)
-	        	BZZR.ChangeFrequency(d)
+			BZZR.start(40)
+	        	BZZR.ChangeFrequency(880)
 			time.sleep(0.2)
 		elif InB3 == False:
 		        print ("B3")
-			BZZR.start(2)
-			BZZR.ChangeFrequency(f)
+			BZZR.start(80)
+			BZZR.ChangeFrequency(1720)
 			time.sleep(0.2)
-			BZZR.stop()
+		BZZR.stop()
 except KeyboardInterrupt:
 	pass
 print("The End")
