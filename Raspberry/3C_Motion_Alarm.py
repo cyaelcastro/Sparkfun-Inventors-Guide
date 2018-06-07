@@ -20,10 +20,10 @@ pwmServo.start(0)
 def SetAngle(angle):
 	duty = angle / 18 +2
 	GPIO.output(servo, GPIO.HIGH)
-	pwm.ChangeDutyCycle(duty)
+	pwmServo.ChangeDutyCycle(duty)
 	sleep(1)
 	GPIO.output(servo, GPIO.LOW)
-	pwm.ChangeDutyCycle(0)
+	#pwmServo.ChangeDutyCycle(0)
 
 def getDistance():
 		GPIO.output(TRIG,GPIO.HIGH)
