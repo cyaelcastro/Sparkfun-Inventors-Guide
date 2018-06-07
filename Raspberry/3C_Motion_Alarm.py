@@ -15,7 +15,7 @@ GPIO.setup(SERVO, GPIO.OUT)
 GPIO.setup(BUZZER, GPIO.OUT)
 
 pwmServo = GPIO.PWM(SERVO,50)
-pwm.start(0)
+pwmServo.start(0)
 
 def SetAngle(angle):
 	duty = angle / 18 +2
