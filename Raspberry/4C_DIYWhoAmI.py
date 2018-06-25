@@ -197,15 +197,15 @@ if __name__ == '__main__':
 					boton = GPIO.input(Button)
 					if boton == False:
 
-					time.sleep(.1)
-					if (time.time() - startTime > timeLimit):
-						gameOver(lcd)
-					if GPIO.input(Button) == False:
+						time.sleep(.1)
+						if (time.time() - startTime > timeLimit):
+							gameOver(lcd)
+						if GPIO.input(Button) == False:
 
-						bzzr.start(2)
-						bzzr.ChangeFrequency(272)
-						time.sleep(1)
-						bzzr.stop()
+							bzzr.start(2)
+							bzzr.ChangeFrequency(272)
+							time.sleep(1)
+							bzzr.stop()
 
 			lcd.clear()
 			time.sleep(2)
