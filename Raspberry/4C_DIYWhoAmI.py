@@ -164,7 +164,10 @@ if __name__ == '__main__':
 		showStartSequence(lcd)
 		for i in range(0,arraySize):
 			roundNumber += 1
+<<<<<<< HEAD
+=======
 			print str(roundNumber)
+>>>>>>> 0c7663911286206225be068de7ab073385b6fd12
 			lcd.clear()
 			lcd.cursor_pos = (0,0)
 			lcd.write_string(str(roundNumber))
@@ -173,25 +176,45 @@ if __name__ == '__main__':
 			print sequence[i]
 			print words[sequence[i]]
 			lcd.write_string(words[sequence[i]])
+<<<<<<< HEAD
+			
+			startTime = time.time()
+			boton = GPIO.input(Button)
+			while(boton == True):
+=======
 			print ("----")
 			
 
 			startTime = time.time()
 
 			while(GPIO.input(Button)):
+>>>>>>> 0c7663911286206225be068de7ab073385b6fd12
 				roundedTime = int(timeLimit - (time.time() - startTime))
 				lcd.cursor_pos = (1,14)
 				lcd.write_string("  ")
 				lcd.cursor_pos = (1,14)
 				lcd.write_string(str(roundedTime))
+<<<<<<< HEAD
+				time.sleep(0.1)	
+				if (time.time() - startTime > timeLimit):
+					gameOver(lcd)
+				boton = GPIO.input(Button)
+				if boton == False:
+=======
 				time.sleep(.1)
 				if (time.time() - startTime > timeLimit):
 					gameOver(lcd)
 				if GPIO.input(Button) == False:
+>>>>>>> 0c7663911286206225be068de7ab073385b6fd12
 					bzzr.start(2)
 					bzzr.ChangeFrequency(272)
 					time.sleep(1)
 					bzzr.stop()
+<<<<<<< HEAD
+			lcd.clear()
+			time.sleep(2)
+=======
+>>>>>>> 0c7663911286206225be068de7ab073385b6fd12
 		winner(lcd)
 
 		
