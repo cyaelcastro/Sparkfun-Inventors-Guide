@@ -17,16 +17,17 @@ speed = 0
 motorEnable.start(0)
 try:
 	while True:
-		speed = input("Please enter the motor speed you want ( 0 - 100): ")
+		speed = int(raw_input("Please enter the motor speed you want ( 0 - 100): "))
 		if speed <= 100 and speed >= 0:
 			motorEnable.ChangeDutyCycle(speed)
-			pass
-		print speed
-		
-		
-		
+		else
+			print ("Try again")
+				
 
 
 except KeyboardInterrupt:
 	pass
+
+except ValueError:
+	print ("That speed ins't possible :(")
 GPIO.cleanup()
