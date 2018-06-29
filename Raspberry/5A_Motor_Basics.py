@@ -17,8 +17,8 @@ speed = 0
 motorEnable.start(0)
 try:
 	while True:
-		speed = input("Please enter the motor speed you want ( 0 - 100:")
-		if speed < 100 and speed >= 0:
+		speed = input("Please enter the motor speed you want ( 0 - 100): ")
+		if speed <= 100 and speed >= 0:
 			motorEnable.ChangeDutyCycle(speed)
 			pass
 		print speed
