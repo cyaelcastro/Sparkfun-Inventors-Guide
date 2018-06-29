@@ -29,5 +29,5 @@ except KeyboardInterrupt:
 	pass
 
 except ValueError:
-	print ("That speed ins't possible :(")
+	print ("That speed isn't possible :(")
 GPIO.cleanup()
