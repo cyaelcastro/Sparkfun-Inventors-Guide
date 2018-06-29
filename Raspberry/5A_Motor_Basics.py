@@ -16,11 +16,15 @@ motorEnable = GPIO.PWM(motor,50)
 speed = 0
 motorEnable.start(0)
 try:
-	while speed < 100:
+	while True:
+		speed = input("Please enter the motor speed you want ( 0 - 100:")
+		if speed < 100 and speed >= 0:
+			motorEnable.ChangeDutyCycle(speed)
+			pass
 		print speed
-		motorEnable.ChangeDutyCycle(speed)
-		time.sleep(5)
-		speed += 10
+		
+		
+		
 
 
 except KeyboardInterrupt:
